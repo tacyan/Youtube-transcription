@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube文字起こしダッシュボード</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 400px;
+            padding: 10px;
+            resize: none;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+        }
+        @media (max-width: 600px) {
+            input[type="text"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            input[type="submit"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube文字起こしダッシュボード</h1>
+        <form action="/transcript" method="POST">
+            <input type="text" name="youtubeURL" placeholder="YouTubeのURLを入力してください" required>
+            <input type="submit" value="文字起こしを取得">
+        </form>
+        <% if (error) { %>
+            <div class="error"><%= error %></div>
+        <% } %>
+        <% if (transcript) { %>
+            <h2>文字起こし</h2>
+            <textarea readonly><%= transcript %></textarea>
+        <% } %>
+    </div>
+</body>
+</html>
